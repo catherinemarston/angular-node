@@ -1,0 +1,13 @@
+<mat-card class="card">
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <input matInput type="text" formControlName="sender" placeholder="Sender">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" formControlName="text" placeholder="Message">
+      </mat-form-field>
+      <button mat-button type="submit" color="primary">Create Message</button>
+    </form>
+  </mat-card-content>
+</mat-card>
