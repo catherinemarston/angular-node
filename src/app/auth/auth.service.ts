@@ -10,9 +10,9 @@ export class AuthService {
 
     constructor(private http: HttpClient, private route: Router) {}
 
-    get name() {
-        return localStorage.getItem(this.NAME_KEY);
-    }
+    // get name() {
+    //     return localStorage.getItem(this.NAME_KEY);
+    // }
 
     get isAuthenticated(): Boolean {
         if (localStorage.getItem(this.TOKEN_KEY)) {

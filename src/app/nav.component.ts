@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
+import { MessagesService, User } from 'src/app/messages/messages.service';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'nav-bar',
@@ -12,7 +14,7 @@ import { AuthService } from 'src/app/auth/auth.service';
     <div>
     <button mat-button *ngIf="!auth.isAuthenticated" routerLink="/login">Login</button>
     <button mat-button *ngIf="!auth.isAuthenticated" routerLink="/register">Register</button>
-    <button mat-button *ngIf="auth.isAuthenticated">Welcome {{auth.name}}</button>
+    <button mat-button *ngIf="auth.isAuthenticated">Welcome {{user.firstName}} {{user.lastName}}</button>
     <button mat-button *ngIf="auth.isAuthenticated" (click)="auth.logout()">Logout</button>
     </div>
     </span>
@@ -20,7 +22,23 @@ import { AuthService } from 'src/app/auth/auth.service';
     styleUrls: ['./app.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-    constructor(private auth: AuthService) {}
+    user: User = this.messagesService.getUserData();
+    constructor(
+        private auth: AuthService,
+        private messagesService: MessagesService,
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit() {
+        // this.messagesService
+        //     .getUser()
+        //     .pipe(
+        //         map(res => {
+        //             this.user = res;
+        //         }),
+        //     )
+        //     .subscribe();
+        this.messagesService.userSubject.subscribe(() => {
+            this.user = this.messagesService.getUserData();
+        });
+    }
 }

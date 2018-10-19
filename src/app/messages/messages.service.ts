@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable()
 export class MessagesService {
+    userSubject = new Subject<User>();
+    user: User;
     BASE_URL = 'http://localhost:63145';
     private messagesStore = [];
     private messageSubject = new Subject();
@@ -51,6 +53,17 @@ export class MessagesService {
         // );
     }
 
+    getUserData() {
+        this.getUser()
+            .pipe(
+                map(res => {
+                    this.user = res;
+                }),
+            )
+            .subscribe();
+        return this.user;
+    }
+
     updateUser(userData): Observable<User> {
         return this.http
             .post<User>(
@@ -60,7 +73,10 @@ export class MessagesService {
             )
             .pipe(
                 tap(res => {
-                    console.log(res);
+                    const editedUser = this.getUserData();
+                    editedUser.firstName = userData.firstName;
+                    editedUser.lastName = userData.lastName;
+                    this.userSubject.next(editedUser);
                 }),
             );
         // .pipe(
@@ -79,7 +95,8 @@ export interface FindResponse<T> {
     data: T[];
 }
 
-export interface User {
+export class User {
     firstName: string;
     lastName: string;
+    email: string;
 }
