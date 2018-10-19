@@ -22,6 +22,7 @@ import { NavBarComponent } from 'src/app/nav.component';
 import { HomeComponent } from 'src/app/home.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { LoginComponent } from 'src/app/login/login.component';
+import { EditProfileComponent } from 'src/app/profile/edit-profile.component';
 
 const routes = [
     {
@@ -44,6 +45,10 @@ const routes = [
         path: 'login',
         component: LoginComponent,
     },
+    {
+        path: 'user',
+        component: EditProfileComponent,
+    },
 ];
 
 @NgModule({
@@ -55,6 +60,7 @@ const routes = [
         NavBarComponent,
         HomeComponent,
         LoginComponent,
+        EditProfileComponent,
     ],
     imports: [
         BrowserModule,

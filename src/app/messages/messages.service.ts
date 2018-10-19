@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable()
 export class MessagesService {
@@ -9,7 +10,7 @@ export class MessagesService {
     private messagesStore = [];
     private messageSubject = new Subject();
     messages = this.messageSubject.asObservable();
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private auth: AuthService) {
         // this.getMessages();
     }
 
@@ -37,6 +38,37 @@ export class MessagesService {
                 }),
             );
     }
+
+    getUser(): Observable<User> {
+        return this.http.get<User>(
+            this.BASE_URL + '/users/me',
+            this.auth.tokenHeader,
+        );
+        // .pipe(
+        //     tap(res => {
+        //         console.log(res);
+        //     }),
+        // );
+    }
+
+    updateUser(userData): Observable<User> {
+        return this.http
+            .post<User>(
+                this.BASE_URL + '/users/me',
+                userData,
+                this.auth.tokenHeader,
+            )
+            .pipe(
+                tap(res => {
+                    console.log(res);
+                }),
+            );
+        // .pipe(
+        //     map(res => {
+        //         console.log(res);
+        //     }),
+        // );
+    }
 }
 export interface Message {
     text: string;
@@ -45,4 +77,9 @@ export interface Message {
 
 export interface FindResponse<T> {
     data: T[];
+}
+
+export interface User {
+    firstName: string;
+    lastName: string;
 }

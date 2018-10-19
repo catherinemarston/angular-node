@@ -22,6 +22,7 @@ export class MessagesComponent implements OnInit {
     ngOnInit() {
         const name = this.route.snapshot.params.name;
         this.messagesService.getMessages(name);
+        this.messagesService.getUser().subscribe();
         // this.messagesService.messages.subscribe(messages => {
         //     this.messages = messages;
         // });
