@@ -14,31 +14,35 @@ import { map } from 'rxjs/operators';
     <div>
     <button mat-button *ngIf="!auth.isAuthenticated" routerLink="/login">Login</button>
     <button mat-button *ngIf="!auth.isAuthenticated" routerLink="/register">Register</button>
-    <button mat-button *ngIf="auth.isAuthenticated">Welcome {{user.firstName}} {{user.lastName}}</button>
+    <button mat-button *ngIf="auth.isAuthenticated">Welcome</button>
     <button mat-button *ngIf="auth.isAuthenticated" (click)="auth.logout()">Logout</button>
     </div>
     </span>
     </mat-toolbar>`,
-    styleUrls: ['./app.component.scss'],
+    styleUrls: ['./app.component.css'],
 })
 export class NavBarComponent implements OnInit {
-    user: User = this.messagesService.getUserData();
+    user: User;
+
     constructor(
         private auth: AuthService,
         private messagesService: MessagesService,
     ) {}
 
     ngOnInit() {
-        // this.messagesService
-        //     .getUser()
-        //     .pipe(
-        //         map(res => {
-        //             this.user = res;
-        //         }),
-        //     )
-        //     .subscribe();
-        this.messagesService.userSubject.subscribe(() => {
-            this.user = this.messagesService.getUserData();
-        });
+        this.messagesService
+            .getUser()
+            .pipe(
+                map(res => {
+                    this.user = res;
+                }),
+            )
+            .subscribe();
+
+        // this.messagesService.userSubject.subscribe(() => {
+        //     this.messagesService.getUserData().subscribe(el => {
+        //         this.user = el;
+        //     });
+        // });
     }
 }

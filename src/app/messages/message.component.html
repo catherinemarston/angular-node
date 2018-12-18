@@ -1,0 +1,22 @@
+<div *ngFor="let message of (messagesService.messages | async)">
+  <mat-card>
+    <mat-card-title [routerLink]="['/messages', message.sender]">{{message.sender}}</mat-card-title>
+    <mat-card-content>{{message.text}}</mat-card-content>
+  </mat-card>
+</div>
+<div class="items-container">
+  <mat-card>
+    <mat-card-content>
+        <mat-form-field><input matInput (keyup)="searchTerm$.next($event.target.value)">
+        </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <ul *ngIf="results">
+    <li *ngFor="let result of results | slice:0:9">
+      <a href="{{ result.latest }}" target="_blank">
+        {{ result.name }}
+      </a>
+    </li>
+  </ul>
+</div>

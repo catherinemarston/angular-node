@@ -8,7 +8,7 @@ import { Output } from '@angular/core';
 @Component({
     selector: 'app-new-message',
     templateUrl: './create-new-message.component.html',
-    styleUrls: ['./message.component.scss'],
+    styleUrls: ['./message.component.css'],
 })
 export class CreateNewMessageComponent implements OnInit {
     form: FormGroup;
