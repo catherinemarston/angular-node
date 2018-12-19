@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { MessagesService, Message, User } from 'src/app/messages/messages.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -9,12 +9,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
     templateUrl: './message.component.html',
     styleUrls: ['./message.component.css'],
 })
-export class MessagesComponent implements OnInit {
-    messages;
-    results;
+export class MessagesComponent implements OnInit, OnChanges {
+    messages: Message[];
+    results = [];
     searchTerm$ = new Subject<string>();
     user: User;
-    public model: any;
     public myForm: FormGroup;
 
     constructor(
@@ -22,32 +21,45 @@ export class MessagesComponent implements OnInit {
         private route: ActivatedRoute,
         private fb: FormBuilder
     ) {
-        this.messagesService.search(this.searchTerm$)
-        .subscribe(res => {
-          this.results = res.results;
-        });
+    }
+    ngOnChanges(changes: SimpleChanges) {
+        this.myForm.reset();
     }
 
     ngOnInit() {
-        // const name = this.route.snapshot.params.name;
-        // this.messagesService.getMessages(name);
-        this.myForm = this.fb.group({
-            name : '',
-          });
+        this.messagesService.search(this.searchTerm$)
+            .subscribe(res => {
+            this.results = res.results;
+        });
+        this.setupForm();
+        this.getUser();
+        this.getMessages();
+    }
 
+    resultsName(result) {
+        return `${result.name}`;
+    }
+
+    getUser() {
         this.messagesService.getUser().subscribe(res => {
             this.user = res;
         });
+    }
 
-        // this.messagesService.messages.subscribe(messages => {
-        //     this.messages = messages;
-        // });
+    setupForm() {
+        this.myForm = this.fb.group({
+            firstName : '',
+          });
+    }
+
+    getMessages() {
         this.messagesService.getMessages(this.user).subscribe(res => {
             this.messages = res;
         });
     }
 
-    onSubmit(name: User) {
-        console.log(name);
-    }
+    onSubmit() {
+        const name = this.myForm.get('firstName').value.name;
+         console.log(name);
+     }
 }

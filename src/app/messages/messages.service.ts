@@ -11,7 +11,7 @@ export class MessagesService {
   BASE_URL = 'http://localhost:63145';
   apiUrl = 'https://api.cdnjs.com/libraries';
   queryUrl = '?search=';
-  res: any;
+  res: Object;
   editedUser: User;
   private messagesStore = [];
   private messageSubject = new Subject();

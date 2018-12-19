@@ -22,25 +22,36 @@
   </ul>
 </div>
 
+<form class="form-horizontal" [formGroup]="myForm">
+  <app-modal-form-control [required]="true" formControlName="firstName">
+    <app-modal-select [options]="results" (keyup)="searchTerm$.next($event.target.value)" [labelFormatter]="resultsName"></app-modal-select>
+  </app-modal-form-control>
+  <button type="submit" (click)="onSubmit()"></button>
+</form>
+
 <!-- <input [(ngModel)]="model" (keyup)="searchTerm$.next($event.target.value)">
   <option *ngFor="let result of results | slice:0:9" [value]="result.latest">
     {{result.name}}
   </option> -->
+
+<!-- 
   <div>
   <form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
         <div>
             <div class="col-sm-5">
                 <input auto-complete
+                      id="model4"
+                      [(ngModel)]="model4"
                        formControlName="name"
-                       [source]="results"
+                       [source]="results ? name : ''"
+                       path-to-data="results"
+                       list-formatter="name"
                        value-property-name="id"
                        display-property-name="name"
                        placeholder="name"
                        class="form-control">
             </div><br/>
-            <button type="submit">Submit</button>
         </div>
     </form>
-</div>
-  <!-- <input (keyup)="searchTerm$.next($event.target.value)" auto-complete [(ngModel)]="myData" [source]="mySource" /> -->
-  
+</div> -->
+<!-- <input (keyup)="searchTerm$.next($event.target.value)" auto-complete [(ngModel)]="myData" [source]="mySource" /> -->
