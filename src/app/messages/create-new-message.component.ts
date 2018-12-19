@@ -33,7 +33,7 @@ export class CreateNewMessageComponent implements OnInit {
     }
 
     onSubmit() {
-        const message = {
+        const message: Message = {
             text: this.form.value.text,
             sender: this.form.value.sender,
         };

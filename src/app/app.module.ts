@@ -8,12 +8,12 @@ import {
     MatCheckboxModule,
     MatCardModule,
     MatSnackBarModule,
-    MatInputModule,
     MatToolbarModule,
-    MatFormFieldModule,
 } from '@angular/material';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RegisterComponent } from 'src/app/register/register.component';
 import { MessagesService } from 'src/app/messages/messages.service';
 import { MessagesComponent } from 'src/app/messages/message.component';
@@ -23,6 +23,7 @@ import { HomeComponent } from 'src/app/home.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { LoginComponent } from 'src/app/login/login.component';
 import { EditProfileComponent } from 'src/app/profile/edit-profile.component';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
 const routes = [
     {
@@ -77,6 +78,11 @@ const routes = [
         MatToolbarModule,
         MatInputModule,
         RouterModule.forRoot(routes),
+        FormsModule,
+        Ng2AutoCompleteModule
+    ],
+    exports: [
+        MatFormFieldModule,
     ],
     providers: [MessagesService, AuthService],
     bootstrap: [AppComponent],
