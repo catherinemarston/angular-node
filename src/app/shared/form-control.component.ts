@@ -13,7 +13,7 @@ import {
     ValidationErrors,
     Validator,
 } from '@angular/forms';
-import { Service } from 'src/app/shared/service';
+import { FormService } from 'src/app/shared/form.service';
 
 @Component({
     selector: 'app-modal-form-control',
@@ -29,7 +29,7 @@ import { Service } from 'src/app/shared/service';
         </div>
     `,
     providers: [
-        Service,
+        FormService,
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => ModalFormControlComponent),
@@ -50,7 +50,7 @@ export class ModalFormControlComponent
     @Input() disabled = false;
     @Input() loading = false;
 
-    constructor(private service: Service) {}
+    constructor(private service: FormService) {}
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.disabled !== undefined) {

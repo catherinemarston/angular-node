@@ -2,7 +2,7 @@
 
 import { Component, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Service } from 'src/app/shared/service';
+import { FormService } from 'src/app/shared/form.service';
 
 @Component({
     selector: 'app-modal-select',
@@ -33,7 +33,7 @@ export class SelectComponent {
 
     value: any;
 
-    constructor(public service: Service) {
+    constructor(public service: FormService) {
         service.getValue().subscribe(value => {
             // FIXME: expression changed after it was checked
             setTimeout(() => {

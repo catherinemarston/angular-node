@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { ValidationErrors } from '@angular/forms';
 
-export class Service {
+export class FormService {
     validationErrors: ValidationErrors | null;
     changeFn: (any) => void;
     validateFn: () => void;

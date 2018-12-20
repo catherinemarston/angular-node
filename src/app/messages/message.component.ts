@@ -19,21 +19,22 @@ export class MessagesComponent implements OnInit, OnChanges {
     constructor(
         public messagesService: MessagesService,
         private route: ActivatedRoute,
-        private fb: FormBuilder
+        private fb: FormBuilder,
     ) {
     }
+
     ngOnChanges(changes: SimpleChanges) {
         this.myForm.reset();
     }
 
     ngOnInit() {
-        this.messagesService.search(this.searchTerm$)
-            .subscribe(res => {
-            this.results = res.results;
-        });
         this.setupForm();
         this.getUser();
         this.getMessages();
+        this.messagesService.search(this.searchTerm$)
+            .subscribe(res => {
+                this.results = res.results;
+    });
     }
 
     resultsName(result) {

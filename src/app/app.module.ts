@@ -26,7 +26,7 @@ import { EditProfileComponent } from 'src/app/profile/edit-profile.component';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { ModalFormControlComponent } from 'src/app/shared/form-control.component';
 import { SelectComponent } from 'src/app/shared/select.component';
-import { Service } from 'src/app/shared/form.service';
+import { FormService } from 'src/app/shared/form.service';
 
 const routes = [
     {
@@ -89,7 +89,7 @@ const routes = [
     exports: [
         MatFormFieldModule,
     ],
-    providers: [MessagesService, AuthService, Service],
+    providers: [MessagesService, AuthService, FormService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
