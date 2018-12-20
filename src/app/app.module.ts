@@ -26,7 +26,7 @@ import { EditProfileComponent } from 'src/app/profile/edit-profile.component';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { ModalFormControlComponent } from 'src/app/shared/form-control.component';
 import { SelectComponent } from 'src/app/shared/select.component';
-import { Service } from 'src/app/shared/service';
+import { Service } from 'src/app/shared/form.service';
 
 const routes = [
     {
