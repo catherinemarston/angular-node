@@ -9,9 +9,6 @@ export class MessagesService {
   userSubject = new Subject < User > ();
   user: User;
   BASE_URL = 'http://localhost:63145';
-  apiUrl = 'https://api.cdnjs.com/libraries';
-  queryUrl = '?search=';
-  res: Object;
   editedUser: User;
   private messagesStore = [];
   private messageSubject = new Subject();
@@ -21,19 +18,18 @@ export class MessagesService {
     // this.getMessages();
   }
 
-  getMessages(user): Observable < Message[] > {
+  getMessages(user): Observable<Message[]> {
     user = user ? '/' + user : '';
     return this.http
-      .get <Message[]> (this.BASE_URL + '/messages' + user)
+      .get<Message[]>(this.BASE_URL + '/messages' + user)
       .pipe(
         tap(response => {
           this.messagesStore = response;
+          // calling next on the subject and passing the response will let any observer such as our
+          // messages component know that there is probably an update and we will pass along the message array
+          // to provide the observer with the array
           this.messageSubject.next(this.messagesStore);
         }));
-    // .subscribe(res => {
-    //     this.messages = res;
-    //     console.log(res);
-    // });
   }
 
   createMessage(message): Observable < Message[] > {
@@ -95,20 +91,6 @@ export class MessagesService {
     //         console.log(res);
     //     }),
     // );
-  }
-
-
-  search(terms: Observable<string> ) {
-    return terms.pipe(debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(res => this.searchEntries(res)));
-  }
-
-  searchEntries(term) {
-    return this.http
-      .get<any>(this.apiUrl + this.queryUrl + term).pipe(
-        map(res => this.res = res)
-      );
   }
 
 }

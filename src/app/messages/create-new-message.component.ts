@@ -33,9 +33,11 @@ export class CreateNewMessageComponent implements OnInit {
     }
 
     onSubmit() {
+        const name = this.form.get('sender').value;
+        const firstName = name.charAt(0).toUpperCase() + name.slice(1);
         const message: Message = {
             text: this.form.value.text,
-            sender: this.form.value.sender,
+            sender: firstName,
         };
         this.messagesService.createMessage(message).subscribe();
         // this.onPosted.emit(message);

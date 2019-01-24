@@ -10,10 +10,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
     styleUrls: ['./message.component.css'],
 })
 export class MessagesComponent implements OnInit, OnChanges {
-    messages: Message[];
-    results = [];
-    searchTerm$ = new Subject<string>();
+    messages;
     user: User;
+    lowerName: string;
     public myForm: FormGroup;
 
     constructor(
@@ -31,10 +30,7 @@ export class MessagesComponent implements OnInit, OnChanges {
         this.setupForm();
         this.getUser();
         this.getMessages();
-        this.messagesService.search(this.searchTerm$)
-            .subscribe(res => {
-                this.results = res.results;
-    });
+
     }
 
     resultsName(result) {
@@ -54,9 +50,13 @@ export class MessagesComponent implements OnInit, OnChanges {
     }
 
     getMessages() {
-        this.messagesService.getMessages(this.user).subscribe(res => {
-            this.messages = res;
-        });
+        const name = this.route.snapshot.params.name;
+        this.messagesService.getMessages(name).subscribe();
+        // this.messagesService.messageSubject.subscribe(messages => this.messages = messages);
+        // EXPLANATION: we want the message subject to be private so no component can call next on it
+        // so we create a messages observable from the message subject and were subscribing to that
+        this.messagesService.messages.subscribe(messages => this.messages = messages);
+        console.log(this.messages);
     }
 
     onSubmit() {

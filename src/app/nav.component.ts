@@ -16,6 +16,7 @@ import { map } from 'rxjs/operators';
     <button mat-button *ngIf="!auth.isAuthenticated" routerLink="/register">Register</button>
     <button mat-button *ngIf="auth.isAuthenticated">Welcome</button>
     <button mat-button *ngIf="auth.isAuthenticated" (click)="auth.logout()">Logout</button>
+    <button mat-button *ngIf="auth.isAuthenticated" routerLink="/libraries">Libraries</button>
     </div>
     </span>
     </mat-toolbar>`,

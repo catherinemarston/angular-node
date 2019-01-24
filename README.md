@@ -1,6 +1,12 @@
 # FrontEnd
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.1. This project is meant to help with your understanding of Node and Angular. The front-end hits several endpoints set up in Node including registering, logging in, getting all messages, and getting messages sent by a specific user. Angular also hits a public API for getting cdn libraries in the libraries component. 
+
+The 'database' is on Google's Firebase where you will find setup instructions.  
+
+Use postman to test endpoints such as fetching all messages and fetching messages for a specific user. 
+
+
 
 ## Development server
 
@@ -25,3 +31,5 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+

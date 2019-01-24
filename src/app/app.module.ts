@@ -27,6 +27,8 @@ import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { ModalFormControlComponent } from 'src/app/shared/form-control.component';
 import { SelectComponent } from 'src/app/shared/select.component';
 import { FormService } from 'src/app/shared/form.service';
+import { LibrariesComponent } from 'src/app/libraries/libraries.component';
+import { LibrariesService } from 'src/app/libraries/libraries.service';
 
 const routes = [
     {
@@ -53,6 +55,10 @@ const routes = [
         path: 'user',
         component: EditProfileComponent,
     },
+    {
+        path: 'libraries',
+        component: LibrariesComponent
+    }
 ];
 
 @NgModule({
@@ -66,7 +72,8 @@ const routes = [
         LoginComponent,
         EditProfileComponent,
         ModalFormControlComponent,
-        SelectComponent
+        SelectComponent,
+        LibrariesComponent
     ],
     imports: [
         BrowserModule,
@@ -89,7 +96,7 @@ const routes = [
     exports: [
         MatFormFieldModule,
     ],
-    providers: [MessagesService, AuthService, FormService],
+    providers: [MessagesService, AuthService, FormService, LibrariesService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -20,6 +20,7 @@ import { FormService } from 'src/app/shared/form.service';
                     (valueChanged)="handleValueChanged($event)"
                     (ngModelChange)="inputChange($event)"
                     max-num-list="10"
+                    min-chars="2"
                    display-property-name="label">
             <i class="form-icon icon icon-caret"></i>
         </div>
